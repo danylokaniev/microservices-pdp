@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { CreateUserDto } from '@nestjs-microservices/shared/dto';
-import { User } from '@nestjs-microservices/shared/entities';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()

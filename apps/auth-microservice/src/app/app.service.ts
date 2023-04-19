@@ -1,21 +1,31 @@
-import { CreateUserDto } from '@nestjs-microservices/shared/dto';
-import { User } from '@nestjs-microservices/shared/entities';
 import { Injectable } from '@nestjs/common';
-import { UsersRepository } from './users.repository';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from './user.schema';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  createUser(data: CreateUserDto): void {
-    this.usersRepository.save(data);
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
   }
 
-  getUser(id: number): User {
-    return this.usersRepository.findOne(id);
+  async findOne(id: string): Promise<User> {
+    return this.userModel.findById(id).exec();
   }
 
-  getUsers(): User[] {
-    return this.usersRepository.getAll();
+  async create(user: Partial<User>): Promise<User> {
+    const newUser = new this.userModel(user);
+    return newUser.save();
+  }
+
+  async update(id: string, user: Partial<User>): Promise<User> {
+    return this.userModel.findByIdAndUpdate(id, user, { new: true }).exec();
+  }
+
+  async delete(id: string): Promise<User> {
+    return this.userModel.findByIdAndDelete(id).exec();
   }
 }
+

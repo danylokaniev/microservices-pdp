@@ -1,5 +1,5 @@
 import { CreateUserDto } from '@nestjs-microservices/shared/dto';
-import { Controller, ParseIntPipe, ValidationPipe } from '@nestjs/common';
+import { Controller, ValidationPipe } from '@nestjs/common';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 
 import { AppService } from './app.service';
@@ -10,16 +10,16 @@ export class AppController {
 
   @EventPattern('create_user')
   handleUserCreate(@Payload(ValidationPipe) data: CreateUserDto) {
-    this.appService.createUser(data);
+    this.appService.create(data);
   }
 
   @MessagePattern('get_user')
-  handleGetUser(@Payload('userId', ParseIntPipe) userId: number) {
-    return this.appService.getUser(userId);
+  handleGetUser(@Payload('userId') userId: string) {
+    return this.appService.findOne(userId);
   }
 
   @MessagePattern('get_users')
   handleGetUsers() {
-    return this.appService.getUsers();
+    return this.appService.findAll();
   }
 }
