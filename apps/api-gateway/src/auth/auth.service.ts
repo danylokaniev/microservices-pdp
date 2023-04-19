@@ -9,8 +9,9 @@ export class AuthService {
     @Inject('AUTH_MICROSERVICE') private readonly authClient: ClientKafka
   ) {}
 
-  createUser(createUserDto: CreateUserDto) {
-    this.authClient.emit('create_user', JSON.stringify(createUserDto));
+  async createUser(createUserDto: CreateUserDto) {
+    const user = await firstValueFrom(this.authClient.send('create_user', JSON.stringify(createUserDto)));
+    return user
   }
 
   async getUsers() {
@@ -21,5 +22,6 @@ export class AuthService {
   onModuleInit() {
     this.authClient.subscribeToResponseOf('get_user');
     this.authClient.subscribeToResponseOf('get_users');
+    this.authClient.subscribeToResponseOf('create_user');
   }
 }
