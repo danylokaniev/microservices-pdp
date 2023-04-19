@@ -1,5 +1,4 @@
-import { MakePaymentDto } from '@nestjs-microservices/shared/dto';
-import { User } from '@nestjs-microservices/shared/entities';
+import { MakePaymentDto, UserDto } from '@nestjs-microservices/shared/dto';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
@@ -14,7 +13,7 @@ export class AppService implements OnModuleInit {
     console.log('process payment');
     this.authClient
       .send('get_user', JSON.stringify({ userId }))
-      .subscribe((user: User) => {
+      .subscribe((user: UserDto) => {
         console.log(
           `process payment for user ${user.name} - amount: ${amount}`
         );
