@@ -2,20 +2,21 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AuthMicroservice } from '@nestjs-microservices/shared/communication';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'AUTH_MICROSERVICE',
+        name: AuthMicroservice.name,
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'auth',
+            clientId: AuthMicroservice.clientId,
             brokers: ['localhost:9092'],
           },
           consumer: {
-            groupId: 'auth-consumer',
+            groupId: AuthMicroservice.groupId,
           },
         },
       },

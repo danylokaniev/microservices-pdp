@@ -2,20 +2,21 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { PaymentController } from './payment.controller';
 import { PaymentService } from './payment.service';
+import { PaymentMicroservice } from '@nestjs-microservices/shared/communication';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'PAYMENT_MICROSERVICE',
+        name: PaymentMicroservice.name,
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'payment',
+            clientId: PaymentMicroservice.clientId,
             brokers: ['localhost:9092'],
           },
           consumer: {
-            groupId: 'payment-consumer',
+            groupId: PaymentMicroservice.groupId,
           },
         },
       },

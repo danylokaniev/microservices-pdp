@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app/app.module';
+import { PaymentMicroservice } from '@nestjs-microservices/shared/communication';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -13,7 +14,7 @@ async function bootstrap() {
           brokers: ['localhost:9092'],
         },
         consumer: {
-          groupId: 'payment-consumer',
+          groupId: PaymentMicroservice.groupId,
         },
       },
     }
