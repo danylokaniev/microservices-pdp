@@ -1,9 +1,9 @@
 import { CreateUserDto } from '@nestjs-microservices/shared/dto';
 import { Controller, ValidationPipe } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { User } from '@nestjs-microservices/shared/entity';
 
 import { AppService } from './app.service';
-import { User } from './user.schema';
 
 import { KafkaMessage } from '@nestjs-microservices/shared/communication';
 

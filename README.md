@@ -23,6 +23,11 @@ npx nx serve auth-microservice
 ```
 
 ## How to run `payments-microservice` microservice: 
+1. Create .env file and pass there MongoDB connection string:
+```
+MONGODB_URI=
+```
+2. Run microservice: 
 
 ```bash
 npx nx serve payments-microservice

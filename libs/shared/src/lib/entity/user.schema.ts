@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { UserDto } from '@nestjs-microservices/shared/dto';
+import { UserDto } from '../dto/user.dto';
 
 @Schema({ timestamps: true })
 export class User extends Document implements UserDto {

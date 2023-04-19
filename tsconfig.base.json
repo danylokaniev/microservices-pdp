@@ -17,6 +17,7 @@
     "paths": {
       "@nestjs-microservices/shared/dto": ["libs/shared/src/lib/dto/index.ts"],
       "@nestjs-microservices/shared/communication": ["libs/shared/src/lib/communication/index.ts"],
+      "@nestjs-microservices/shared/entity": ["libs/shared/src/lib/entity/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]
