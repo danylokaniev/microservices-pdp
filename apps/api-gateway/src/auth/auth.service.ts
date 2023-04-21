@@ -23,7 +23,6 @@ export class AuthService {
 
   onModuleInit() {
     this.authClient.subscribeToResponseOf(KafkaMessage.CREATE_USER);
-    this.authClient.subscribeToResponseOf(KafkaMessage.GET_USER);
     this.authClient.subscribeToResponseOf(KafkaMessage.GET_USERS);
   }
 }
